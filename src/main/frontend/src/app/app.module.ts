@@ -6,23 +6,21 @@ import {DataTableModule} from 'angular2-datatable';
 
 import {AppComponent} from './app.component';
 import {UsersComponent} from './stock-management-system/administration/users/users.component';
-import {ProductsComponent} from './stock-management-system/administration/products/products.component';
-import {CategoriesComponent} from './stock-management-system/administration/categories/categories.component';
 
 import {UsersService} from './stock-management-system/administration/users/users.service';
-import {ProductsService} from './stock-management-system/administration/products/products.service';
-import {CategoriesService} from './stock-management-system/administration/categories/categories.service';
 
 import {AppRoutingModule} from './app-routing.module';
+import {ItemsComponent} from "./stock-management-system/administration/items/items.component";
+import {ItemsService} from "./stock-management-system/administration/items/items.service";
 
 @NgModule({
   declarations: [
-    AppComponent, UsersComponent, ProductsComponent, CategoriesComponent
+    AppComponent, UsersComponent, ItemsComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, FormsModule, HttpModule, DataTableModule
   ],
-  providers: [UsersService, ProductsService, CategoriesService],
+  providers: [UsersService, ItemsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
