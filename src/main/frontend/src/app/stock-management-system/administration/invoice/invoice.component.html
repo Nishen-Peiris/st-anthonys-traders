@@ -1,0 +1,143 @@
+<div class="jumbotron"
+     style="background-color: transparent; padding-bottom: 0px !important; margin-bottom: 0px !important;">
+  <div class="row">
+    <div class="row">
+      <div id="main-container-invoice" class="col-sm-12">
+        <div class="col-sm-12">
+          <div class="col-sm-12" style="padding-bottom: 50px">
+            <!-------------------- Add invoice form -------------------->
+            <form>
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <b [hidden]="!createMode">Add invoice</b>
+                  <b [hidden]="createMode">Edit invoice</b>
+                </div>
+                <div class="panel-body">
+                  <div class="col-sm-12">
+                    <table class="table panel-table">
+                      <tr>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Invoice no.:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="invoice.invoiceNumber"
+                                   name="invoiceNumber"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Issue no.:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="invoice.issueNumber" name="issueNumber"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Order no.:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="invoice.orderNumber" name="orderNumber"
+                                   required="required">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Vehicle no.:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="invoice.vehicleNumber"
+                                   name="vehicleNumber"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td colspan="3" style="border-top: none">
+                          <div>
+                            <h5><b>Driver:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="invoice.driver" name="driver"
+                                   required="required">
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="form-group ">
+                    <div class="col-sm-12" [hidden]="!createMode">
+                      <button (click)="add(invoice)" onclick="validate()" class="btn btn-success update-job pull-right col-sm-1"><i
+                        class="fa fa-floppy-o" style="padding-right: 8px"></i><b>Add</b>
+                      </button>
+                    </div>
+                    <div class="col-sm-12" [hidden]="createMode">
+                      <button (click)="edit(invoice)" class="btn btn-success update-job pull-right col-sm-1"><i
+                        class="fa fa-pencil-square-o" style="padding-right: 8px"></i><b>Edit</b>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-------------------- Date table -------------------->
+            <table class="table table-striped" #mf="mfDataTable" [mfData]="invoices" [mfRowsOnPage]="rowsOnPage"
+                   [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+              <tr>
+                <th width="75px">
+                  Actions
+                </th>
+                <th>
+                  <mfDefaultSorter by="invoiceNumber">Invoice no.</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="issueNumber">Issue no.</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="orderNumber">Order no.</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="vehicleNumber">Vehicle no.</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="driver">Driver</mfDefaultSorter>
+                </th>
+              </tr>
+              </thead>
+              <tbody style="background-color: white">
+              <tr *ngFor="let item of mf.data">
+                <td>
+                  <i style="padding-right: 15px" class="fa fa-pencil-square-o" aria-hidden="true"
+                     (click)="selectItem(item)"></i>
+                  <i class="fa fa-trash" aria-hidden="true" (click)="delete(item)"></i>
+                </td>
+                <td>{{item.code}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+              </tr>
+              </tbody>
+              <tfoot style="background: white; padding-bottom: 0; padding-top: 0; text-align: center">
+              <tr>
+                <td colspan="6">
+                  <mfBootstrapPaginator [rowsOnPageSet]="rowsOnPage"></mfBootstrapPaginator>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  validate
+</script>

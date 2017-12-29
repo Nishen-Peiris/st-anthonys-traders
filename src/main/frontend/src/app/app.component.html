@@ -27,24 +27,18 @@
               <span ng-cloak>Admins</span>
             </a>
           </li>
-          <!--<li routerLink="/products" [ngClass]="{'active':activeTab=='Products'}" (click)="setActiveTab('Products')">-->
-          <!--<a>-->
-          <!--<i class="fa fa-shopping-basket" aria-hidden="true"></i>-->
-          <!--<span ng-cloak>Products</span>-->
-          <!--</a>-->
-          <!--</li>-->
-          <!--<li routerLink="/categories" [ngClass]="{'active':activeTab=='Categories'}"-->
-          <!--(click)="setActiveTab('Categories')">-->
-          <!--<a>-->
-          <!--<i class="fa fa-tags" aria-hidden="true"></i>-->
-          <!--<span ng-cloak>Categories</span>-->
-          <!--</a>-->
-          <!--</li>-->
           <li routerLink="/items" [ngClass]="{'active':activeTab=='Items'}"
               (click)="setActiveTab('Items')">
             <a>
               <i class="fa fa-tags" aria-hidden="true"></i>
               <span ng-cloak>Items</span>
+            </a>
+          </li>
+          <li routerLink="/invoice" [ngClass]="{'active':activeTab=='Invoice'}"
+              (click)="setActiveTab('Invoice')">
+            <a>
+              <i class="fa fa-files-o" aria-hidden="true"></i>
+              <span ng-cloak>Invoice</span>
             </a>
           </li>
         </ul>

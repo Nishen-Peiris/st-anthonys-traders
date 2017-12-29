@@ -12,15 +12,17 @@ import {UsersService} from './stock-management-system/administration/users/users
 import {AppRoutingModule} from './app-routing.module';
 import {ItemsComponent} from "./stock-management-system/administration/items/items.component";
 import {ItemsService} from "./stock-management-system/administration/items/items.service";
+import {InvoiceComponent} from './stock-management-system/administration/invoice/invoice.component';
+import {InvoiceService} from './stock-management-system/administration/invoice/invoice.service';
 
 @NgModule({
   declarations: [
-    AppComponent, UsersComponent, ItemsComponent
+    AppComponent, UsersComponent, ItemsComponent, InvoiceComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, FormsModule, HttpModule, DataTableModule
   ],
-  providers: [UsersService, ItemsService],
+  providers: [UsersService, ItemsService, InvoiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
