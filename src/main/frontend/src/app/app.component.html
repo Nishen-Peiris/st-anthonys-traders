@@ -21,10 +21,11 @@
     <div class="nav-side-menu change">
       <div class="menu-list">
         <ul id="menu-content" class="menu-content collapse out">
-          <li routerLink="/users" [ngClass]="{'active':activeTab=='Admins'}" (click)="setActiveTab('Admins')">
+          <li routerLink="/drivers" [ngClass]="{'active':activeTab=='Drivers'}"
+              (click)="setActiveTab('Drivers')">
             <a>
               <i class="fa fa-user" aria-hidden="true"></i>
-              <span ng-cloak>Admins</span>
+              <span ng-cloak>Drivers</span>
             </a>
           </li>
           <li routerLink="/items" [ngClass]="{'active':activeTab=='Items'}"
