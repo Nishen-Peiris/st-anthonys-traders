@@ -1,7 +1,7 @@
 package com.nishenpeiris.StockManagementSystem.controller;
 
-import com.nishenpeiris.StockManagementSystem.Product;
-import com.nishenpeiris.StockManagementSystem.ProductNameAlreadyInUseException;
+import com.nishenpeiris.StockManagementSystem.*;
+import com.nishenpeiris.StockManagementSystem.repository.ItemRepository;
 import com.nishenpeiris.StockManagementSystem.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +16,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping(path = "/product")
 public class ProductController {
     ProductRepository productRepository;
+
+    ItemRepository itemRepository;
 
     @Autowired
     public ProductController(ProductRepository productRepository) {
@@ -32,12 +34,34 @@ public class ProductController {
         }
     }
 
+//    @RequestMapping(method = POST)
+//    public ResponseEntity<?> create(@RequestBody Product product) {
+//        try {
+//
+//   productRepository.add(product);
+//            return new ResponseEntity<>(HttpStatus.OK);
+//        } catch (ProductNameAlreadyInUseException e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.CONFLICT);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
+
+
+
     @RequestMapping(method = POST)
-    public ResponseEntity<?> create(@RequestBody Product product) {
+    public ResponseEntity<?> create(@RequestBody Item item) {
         try {
-            productRepository.add(product);
+            itemRepository.add(item);
+
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (ProductNameAlreadyInUseException e) {
+        } catch (ItemNameAlreadyInUseException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (ItemCodeAlreadyInUseException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (Exception e) {
@@ -45,6 +69,11 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
+
+
 
     @RequestMapping(method = PUT)
     public ResponseEntity<?> update(@RequestBody Product product) {
@@ -67,4 +96,26 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+//
+//    @RequestMapping(method = POST)
+//    public ResponseEntity<?> create(@RequestBody Item item) {
+//        try {
+//            itemRepository.add(item);
+//            return new ResponseEntity<>(HttpStatus.OK);
+//        } catch (ItemNameAlreadyInUseException e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.CONFLICT);
+//        } catch (ItemCodeAlreadyInUseException e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.CONFLICT);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
+
+
 }

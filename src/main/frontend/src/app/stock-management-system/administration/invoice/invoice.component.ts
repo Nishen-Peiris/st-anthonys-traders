@@ -2,6 +2,9 @@ import {Component, OnInit} from "@angular/core";
 import {InvoiceService} from "./invoice.service";
 import {Invoice} from "../../shared/Invoice";
 
+import {Item} from "../../shared/Item";
+// import {InvoiceService} from "./invoice.service";
+
 @Component({
   templateUrl: './invoice.component.html'
 })
@@ -14,16 +17,32 @@ export class InvoiceComponent implements OnInit {
   sortBy = "invoiceNumber";
   sortOrder = "asc";
 
+  items: Item[];
+  item: Item;
+
+
+
+
+
+
   constructor(private invoiceService: InvoiceService) {
 
   }
+
 
   ngOnInit(): void {
     this.createMode = true;
     this.invoice = new Invoice();
     this.invoices = new Array();
     this.getInvoices();
+
+
+
+
   }
+
+
+
 
   getInvoices() {
     this.invoiceService.getInvoices().subscribe(
@@ -88,4 +107,55 @@ export class InvoiceComponent implements OnInit {
     this.invoice = invoice;
     this.createMode = false;
   }
+
+
+
+
+  // item
+
+
+  //
+  //
+  add1(invoice: Invoice) {
+
+
+
+    this.invoiceService.create1(this.invoice).subscribe(
+      data => {
+        console.log("Saved item");
+        this.invoice = new Invoice();
+        this.getInvoices();
+      },
+      error => {
+        const status = error.status.toString();
+        if (status === "409") {
+          console.log("A item exists with the same name. Please use a different name.");
+        } else {
+          console.log("Internal server error occurred while processing your request. Please try again later.");
+        }
+      }
+    );
+
+
+
+    this.invoiceService.create1(this.invoice).subscribe(
+      data => {
+        console.log("Saved item");
+        this.invoice = new Invoice();
+        this.getInvoices();
+      },
+      error => {
+        const status = error.status.toString();
+        if (status === "409") {
+          console.log("A item exists with the same name. Please use a different name.");
+        } else {
+          console.log("Internal server error occurred while processing your request. Please try again later.");
+        }
+      }
+    );
+  }
+
+
 }
+
+

@@ -1,3 +1,42 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>
+
+<script src="../../../../js/select.js"></script>
+<!--<link rel="stylesheet" href="../../../../css/selectB.css">-->
+
+
+<script src="../../../../js/demo.js"></script>
+
+<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+
+<style>
+  body {
+    padding: 15px;
+  }
+
+  .select2 > .select2-choice.ui-select-match {
+    /* Because of the inclusion of Bootstrap */
+    height: 29px;
+  }
+
+  .selectize-control > .selectize-dropdown {
+    top: 36px;
+  }
+  /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+  .select-box {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+  }
+  .alert-info.positioned {
+    margin-top: 1em;
+    position: relative;
+    z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+  }
+</style>
 <div class="jumbotron"
      style="background-color: transparent; padding-bottom: 0px !important; margin-bottom: 0px !important;">
   <div class="row">
@@ -86,7 +125,143 @@
                 </div>
               </div>
             </form>
+
+            <form>
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <b [hidden]="!createMode">Add invoice</b>
+                  <b [hidden]="createMode">Edit invoice</b>
+                </div>
+                <div class="panel-body">
+                  <div class="col-sm-12">
+                    <table class="table panel-table">
+                      <tr>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Name:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="invoice.name" name="invoice"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>code:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="invoice.code" name="code"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Description:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="invoice.description" name="description"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%"></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="form-group ">
+                    <div class="col-sm-12" [hidden]="!createMode">
+                      <button (click)="add1(invoice)" class="btn btn-success update-job pull-right col-sm-1"><i
+                        class="fa fa-floppy-o" style="padding-right: 8px"></i><b>Add</b>
+                      </button>
+                    </div>
+                    <div class="col-sm-12" [hidden]="createMode">
+                      <button (click)="edit(invoice)" class="btn btn-success update-job pull-right col-sm-1"><i
+                        class="fa fa-pencil-square-o" style="padding-right: 8px"></i><b>Edit</b>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
             <!-------------------- Date table -------------------->
+            <!--<table class="table table-striped" #mf="mfDataTable" [mfData]="invoices" [mfRowsOnPage]="rowsOnPage"-->
+                   <!--[(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">-->
+              <!--<thead>-->
+              <!--<tr>-->
+                <!--<th width="75px">-->
+                  <!--Actions-->
+                <!--</th>-->
+                <!--<th>-->
+                  <!--<mfDefaultSorter by="code">Code</mfDefaultSorter>-->
+                <!--</th>-->
+                <!--<th>-->
+                  <!--<mfDefaultSorter by="name">invoice</mfDefaultSorter>-->
+                <!--</th>-->
+                <!--<th>-->
+                  <!--<mfDefaultSorter by="description">Description</mfDefaultSorter>-->
+                <!--</th>-->
+              <!--</tr>-->
+              <!--</thead>-->
+              <!--<tbody style="background-color: white">-->
+              <!--<tr *ngFor="let invoice of mf.data">-->
+                <!--<td>-->
+                  <!--<i style="padding-right: 15px" class="fa fa-pencil-square-o" aria-hidden="true"-->
+                     <!--(click)="selectinvoice(invoice)"></i>-->
+                  <!--<i class="fa fa-trash" aria-hidden="true" (click)="delete(invoice)"></i>-->
+                <!--</td>-->
+                <!--<td>{{invoice.code}}</td>-->
+                <!--<td>{{invoice.name}}</td>-->
+                <!--<td>{{invoice.description}}</td>-->
+              <!--</tr>-->
+              <!--</tbody>-->
+              <!--<tfoot style="background: white; padding-bottom: 0; padding-top: 0; text-align: center">-->
+              <!--<tr>-->
+                <!--<td colspan="4">-->
+                  <!--<mfBootstrapPaginator [rowsOnPageSet]="rowsOnPage"></mfBootstrapPaginator>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--</tfoot>-->
+            <!--</table>-->
+
+
+            <form>
+
+
+              <div class="row" #mf="mfDataTable" [mfData]="items">
+
+                <div class="col-md-3" *ngFor="let item of mf.data"  >
+
+
+
+                  <select>
+                    <option selected value="{{item.name}}">Select Item</option>
+
+                  </select>
+
+                  <input type="text" class="form-control" [(ngModel)]="invoice.code" name="code" required="required">
+
+
+
+                </div>
+
+                <div class="col-md-3">
+                  <input type="text" class="form-control" [(ngModel)]="invoice.quty" name="invoice"  required="required">
+
+                </div>
+                <div class="col-md-3">
+
+                  <button (click)="addInvoice(invoice)" class="btn btn-success update-job pull-right col-sm-1"><i
+                    class="fa fa-floppy-o" style="padding-right: 8px"></i><b>Add</b>
+                  </button>
+                </div>
+                <div class="col-md-3"></div>
+
+              </div>
+        </form>
+
+            ------------------ Date table ------------------
             <table class="table table-striped" #mf="mfDataTable" [mfData]="invoices" [mfRowsOnPage]="rowsOnPage"
                    [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
               <thead>
@@ -112,15 +287,15 @@
               </tr>
               </thead>
               <tbody style="background-color: white">
-              <tr *ngFor="let item of mf.data">
+              <tr *ngFor="let invoice of mf.data">
                 <td>
                   <i style="padding-right: 15px" class="fa fa-pencil-square-o" aria-hidden="true"
-                     (click)="selectItem(item)"></i>
-                  <i class="fa fa-trash" aria-hidden="true" (click)="delete(item)"></i>
+                     (click)="selectinvoice(invoice)"></i>
+                  <i class="fa fa-trash" aria-hidden="true" (click)="delete(invoice)"></i>
                 </td>
-                <td>{{item.code}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.description}}</td>
+                <td>{{invoice.code}}</td>
+                <td>{{invoice.name}}</td>
+                <td>{{invoice.description}}</td>
               </tr>
               </tbody>
               <tfoot style="background: white; padding-bottom: 0; padding-top: 0; text-align: center">

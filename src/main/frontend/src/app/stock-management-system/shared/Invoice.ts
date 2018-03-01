@@ -6,4 +6,11 @@ export class Invoice {
   orderNumber: string;
   vehicleNumber: string;
   driver: string;
+
+  name: string;
+  code: number;
+  description: string;
+  itemName: string;
+  quty:string;
+
 }

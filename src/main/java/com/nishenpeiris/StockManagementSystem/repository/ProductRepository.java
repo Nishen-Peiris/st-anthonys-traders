@@ -41,6 +41,36 @@ public class ProductRepository implements Repository<Product> {
         }
     }
 
+
+
+//
+//
+//    @Override
+//    public void add(Item item) throws Exception {
+//        Session session = sessionFactory.openSession();
+//        HibernateSpecification specification = new ItemSpecificationByName(item.getName());
+//        List<Item> list = query(specification);
+//        if (!list.isEmpty()) {
+//            System.out.println("Failed to save item: item name - " + item.getName() + " already in use");
+//            throw new ItemNameAlreadyInUseException();
+//        }
+//        try {
+//            session.save(item);
+//            System.out.println("Saved item {" + item.getId() + " " + item.getName() + " " + item.getCode() + "}.");
+//        } catch (HibernateException ex) {
+//            System.out.println("Failed to save item {" + item.getId() + " " + item.getName() + " " + item.getCode() + "}: Hibernate Exception");
+//            ex.printStackTrace();
+//            throw ex;
+//        } finally {
+//            session.close();
+//        }
+//    }
+//
+//
+
+
+
+
     @Override
     public void remove(Product product) throws Exception {
         Session session = sessionFactory.openSession();
