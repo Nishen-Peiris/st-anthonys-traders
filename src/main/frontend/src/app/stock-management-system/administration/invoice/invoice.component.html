@@ -64,7 +64,7 @@
                             <h5><b>Driver:</b></h5>
                           </div>
                           <div>
-                            <select [(ngModel)]="driver" (change)="onChangeDriver($event.target.value)" name="drivers"
+                            <select (change)="onChangeDriver($event.target.value)" name="drivers"
                                     style="width: 100%; height: 35px" required="required">
                               <option disabled="disabled">Select driver</option>
                               <option *ngFor="let driver of drivers" [value]="driver.id">
