@@ -106,7 +106,11 @@ export class InvoiceComponent implements OnInit {
     this.createMode = false;
   }
 
-  onChangeDriver() {
-    this.invoice.driver = this.driver;
+  onChangeDriver(id: number) {
+    for (var i = 0; i < this.drivers.length; i++) {
+      if (id == this.drivers[i].id) {
+        this.invoice.driver = this.drivers[i];
+      }
+    }
   }
 }
