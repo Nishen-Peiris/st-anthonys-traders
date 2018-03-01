@@ -1,7 +1,10 @@
 package com.nishenpeiris.StockManagementSystem.controller;
 
-import com.nishenpeiris.StockManagementSystem.*;
-import com.nishenpeiris.StockManagementSystem.repository.DriverRepository;
+import com.nishenpeiris.StockManagementSystem.Driver;
+import com.nishenpeiris.StockManagementSystem.DriverNameAlreadyInUseException;
+import com.nishenpeiris.StockManagementSystem.Invoice;
+import com.nishenpeiris.StockManagementSystem.InvoiceNumberAlreadyInUseException;
+import com.nishenpeiris.StockManagementSystem.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,19 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
-@RequestMapping(path = "/driver")
-public class DriverController {
-    DriverRepository driverRepository;
+@RequestMapping(path = "/invoice")
+public class InvoiceController {
+    InvoiceRepository invoiceRepository;
 
     @Autowired
-    public DriverController(DriverRepository driverRepository) {
-        this.driverRepository = driverRepository;
+    public InvoiceController(InvoiceRepository invoiceRepository) {
+        this.invoiceRepository = invoiceRepository;
     }
 
     @RequestMapping(method = GET)
-    public ResponseEntity<?> getDrivers() {
+    public ResponseEntity<?> getInvoices() {
         try {
-            return new ResponseEntity<>(driverRepository.query(null), HttpStatus.OK);
+            return new ResponseEntity<>(invoiceRepository.query(null), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -32,11 +35,11 @@ public class DriverController {
     }
 
     @RequestMapping(method = POST)
-    public ResponseEntity<?> create(@RequestBody Driver driver) {
+    public ResponseEntity<?> create(@RequestBody Invoice invoice) {
         try {
-            driverRepository.add(driver);
+            invoiceRepository.add(invoice);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (DriverNameAlreadyInUseException e) {
+        } catch (InvoiceNumberAlreadyInUseException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (Exception e) {
@@ -46,9 +49,9 @@ public class DriverController {
     }
 
     @RequestMapping(method = PUT)
-    public ResponseEntity<?> update(@RequestBody Driver driver) {
+    public ResponseEntity<?> update(@RequestBody Invoice invoice) {
         try {
-            driverRepository.update(driver);
+            invoiceRepository.update(invoice);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,9 +60,9 @@ public class DriverController {
     }
 
     @RequestMapping(method = DELETE)
-    public ResponseEntity<?> delete(@RequestBody Driver driver) {
+    public ResponseEntity<?> delete(@RequestBody Invoice invoice) {
         try {
-            driverRepository.remove(driver);
+            invoiceRepository.remove(invoice);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
