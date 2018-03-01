@@ -1,3 +1,5 @@
+import {Driver} from "./Driver";
+
 export class Invoice {
   id: number;
   date: Date;
@@ -5,5 +7,7 @@ export class Invoice {
   issueNumber: string;
   orderNumber: string;
   vehicleNumber: string;
-  driver: string;
+  driver: Driver;
+  subTotal: number;
+  grandTotal: number;
 }
