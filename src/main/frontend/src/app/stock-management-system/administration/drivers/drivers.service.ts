@@ -5,7 +5,7 @@ import {Driver} from "../../shared/Driver";
 @Injectable()
 export class DriversService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private driversUrl = 'api/drivers';
+  private driversUrl = 'api/driver';
 
   constructor(private http: Http) {
 
