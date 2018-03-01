@@ -84,7 +84,7 @@ export class DriversComponent implements OnInit {
     );
   }
 
-  selectItem(driver: Driver) {
+  selectDriver(driver: Driver) {
     this.driver = driver;
     this.createMode = false;
   }
